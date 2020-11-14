@@ -109,4 +109,88 @@ function phoneticLookup (val) {
     return result;
 }
 
-console.log(phoneticLookup('alpha'))
+console.log(phoneticLookup('alpha'));
+
+// Verificando propriedades de objetos
+
+var myObj =  {
+    gift:'pony',
+    pet:'kitten',
+    bed:'sleigh'
+};
+
+function checkObj(checkProp) {
+    if (myObj.hasOwnProperty(checkProp)) { 
+        return myObj[checkProp];
+    } else {
+        return 'Not Found'
+    };
+}
+
+console.log(checkObj('gift'))
+
+// Acessando elementos de objetos dentro de outros objetos
+
+var myStorage = {
+    'car': {
+        'inside': {
+            'glove box':'maps',
+            'passenger seat':'crumbs'
+        },
+        'outside' : {
+            'trunk':'jack'
+        }
+    }
+};
+
+var gloveBoxContents = myStorage.car.inside['glove box']; //Acessando os elementos internos
+
+console.log(gloveBoxContents);
+
+// Aplicação 2 - Gravador de discos
+
+var collection = {
+    '2548': {
+        'album' : 'Slippery not Wet',
+        'artist': 'Bon Jovi',
+        'tracks': [
+            'Let it Rock',
+            'You Give Love a Bad Name'
+        ]
+    },
+
+    '2468': {
+        'album' : '1999',
+        'artist':'Prince',
+        'tracks': [
+            '1999',
+            'Little Red Convert'
+        ]
+    },
+
+    '1245': {
+        'artist':'Robert Palmer',
+        'tracks': [
+        ]
+    },
+
+    '5439':{
+        'album':'Abba Gold',
+    }
+};
+
+var collectionCopy = JSON.parse(JSON.stringify(collection));
+
+function updateRecords (id,prop,value){
+    if (value === ''){
+        delete collection[id][prop];
+    } else if (prop === 'tracks'){
+        collection[id][prop] = collection[id][prop] || [];
+        collection[id][prop].push(value);
+    } else {
+        collection[id][prop] == value;
+    }
+};
+
+console.log(updateRecords('5439','artist','ABBA'));
+console.log(collectionCopy)
