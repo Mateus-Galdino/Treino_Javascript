@@ -346,5 +346,51 @@ function cc(carta){
 
 cc(2);cc('K');cc(10);cc('K');cc('A');
 
+// Função parseInt - convertendo valores para números inteiros
+
+function convertToString(str){
+
+    return parseInt(str)
+
+};
+
+convertToString('56')
+
+// Convertendo para outros tipos de contagem
+
+function binarioParaInteger(bin){
+
+    return parseInt(bin,2);
+
+};
+
+console.log(binarioParaInteger('100011'))
+
+// Operador Condicional (Ternário) - um if/else curto
+
+function comparar(a,b){
+    return a === b ? true : false;
+};
+
+console.log(comparar(3,3));
+
+// Operadores ternários múltiplos
+
+function checkSign (num){
+    return num > 0 ? 'positivo': num < 0 ? 'negativo' : 'zero'
+};
+
+console.log(checkSign(4));
+
+/*
+
+                                Diferenças de escopo de var e let
+
+As variáveis declaradas com var estão acessíveis para todos os escopos do projeto, enquanto as variáveis
+definidas com let estão acessíveis apenas para o escopo em que foram criadas.
+
+*/
+
+
 
 
