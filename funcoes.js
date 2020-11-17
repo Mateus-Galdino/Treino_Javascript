@@ -384,13 +384,196 @@ console.log(checkSign(4));
 
 /*
 
-                                Diferenças de escopo de var e let
+                                Diferenças de escopo de var, let, e const
 
 As variáveis declaradas com var estão acessíveis para todos os escopos do projeto, enquanto as variáveis
-definidas com let estão acessíveis apenas para o escopo em que foram criadas.
+definidas com let estão acessíveis apenas para o escopo em que foram criadas. Podemos,então, declarar variáveis
+de 3 modos:
+
+var: acessível a todo o escopo, mesmo que esteja dentro de uma função 
+let: acessível apenas ao escopo em que foi declarada
+const: atribui um valor imutável. Const é muito usado quando o programador queira que uma variável tenha o 
+mesmo valor ao longo de todo o projeto
 
 */
 
+// Modificação de arrays declaradas com const: é possível modificar itens individualmente
 
+const s = [2,3,4];
 
+function editInPlace() {
+    'use strict';
+    s[0] = 4;
+    s[1] = 5;
+    s[2] = 7;
+};
+
+editInPlace();
+
+console.log(s) // Deu errado. Por quê?
+
+// Prevenindo alterações de objetos com a propriedade Object.freeze
+
+function freezeObj() {
+    'use strict';
+    const mathPi = {
+        Pi:3.14
+    };
+
+    Object.freeze(mathPi);
+
+    try {
+        mathPi.Pi = 99;
+    } catch (ex) {
+        console.log(ex);
+    };
+
+    return mathPi.Pi;
+};
+
+const Pi = freezeObj();
+
+console.log(Pi);
+
+// Funções anônimas: declarando funções em variáveis usando a seta
+
+const magic = () => new Date();
+
+// Funções de flecha com parâmetros
+
+const myConcat = (arr1,arr2) => arr1.concat(arr2);
+
+console.log(myConcat([1,2],[3,4,5]));
+
+// Funções de flechas de alta ordem
+
+const realNumberArray = [4,5.6,-9.8,4.14,42,6,8.34,-2];
+
+const squareList = (arr) => {
+    const squaredIntegers = arr.filter(num => Number.isInteger(num) && num >0).map(x => x*x);
+    return squaredIntegers;
+};
+
+const squaredIntegers = squareList(realNumberArray);
+
+console.log(squaredIntegers); // Deu errado. Por quê?
+
+// Exemplo 2 - Parâmetros default
+
+const increment = (function() {
+
+    return function increment(number,value = 1) { //Caso nada seja passado, o valor a ser adicionado será 1
+        return number + value;
+    };
+}) ();
+
+console.log(increment(5,2));
+console.log(increment(5))
+
+// Operador rest: permite quantos parametros quisermos
+
+const sum = (function() {
+    return function sum(...args){
+        return args.reduce((a,b) => a + b, 0);
+    }
+}) ();
+
+console.log(sum(1,2,3,4,5));
+
+// Operador spread em arrays
+
+const arr1 = ['JAN','FEV','MAR','ABR','MAI'];
+
+let arr2;
+
+(function() {
+    arr2 = [...arr1]; // Pega somente os valores de arr1 original
+    arr1[0] = 'potato' // Altera o valor do primeiro elemento de arr1
+}) ();
+
+console.log(arr1);
+console.log(arr2);
+
+// Atribuição desestruturada para atribuições de variáveis de objetos
+
+var voxel = {x : 3.6,y : 7.4,z : 6.54};
+
+const {x : a,y : b,z : c} = voxel; // Atribuição desestruturada. É o mesmo que declarar as variáveis individualmente. No caso, a = x, b = y, e c = z
+
+const avg_Temperatures = {
+    today:35,
+    tomorrow:32
+};
+
+function getTempOfTomorrow(avgTemperatures) {
+    'use strict';
+    const {tomorrow : tempOfTomorrow} = avgTemperatures; // A variável tempOfTomorrow receberá o valor da variável tomorrow da const avgTemperatures
+    return tempOfTomorrow;
+};
+
+console.log(getTempOfTomorrow(avg_Temperatures));
+
+// Objetos multidimensionais e atribuição desestruturada
+
+const LOCAL_FORECAST =  {
+    today:{min:20,max:32},
+    tomorrow:{min:24,max:29}
+};
+
+function getMaxOfTomorrow (forecast) {
+    'use strict';
+    const {tomorrow : {max : maxOfTomorrow}} = forecast; // Indica que a propriedade max está dentro do objeto tomorrow do parâmetro que for inserido na função
+    return maxOfTomorrow;
+};
+
+console.log(getMaxOfTomorrow(LOCAL_FORECAST));
+ 
+// Arrays e atribuição desestruturada
+
+const [z,x] = [1,2,3,4,5,6];
+console.log(z,x);
+
+let a = 8, b = 6;
+
+(() => {
+    'use strict';
+    [a,b] = [b,a];
+
+}) ();
+
+console.log(a);
+console.log(b);
+
+// Atribuição desestruturada com o operador rest
+
+const source = [1,2,3,4,5,6,7,8,9,10];
+
+function removeFirstTwo (list) {
+    const [, , ...arr] = list;
+    return arr;
+};
+
+const arr = removeFirstTwo(source);
+console.log(arr);
+console.log(source);
+
+// Atribuição desestruturada com objetos 
+
+const stats = {
+    max:56.78,
+    standard_deviation : 4.34,
+    median : 34.54,
+    mode : 23.97,
+    min : -0.75,
+    average: 35.85
+};
+
+const half = (function(){
+    return function half ({max,min}){
+        return (max + min)/2;
+    };
+});
+
+console.log(stats);
+console.log(half(stats))
 
