@@ -194,3 +194,43 @@ function updateRecords (id,prop,value){
 
 console.log(updateRecords('5439','artist','ABBA'));
 console.log(collectionCopy)
+
+// Métodos getters and setters: pegam e definem valores de variáveis em classes
+
+class Book {
+    constructor(author) {
+        this._author = author;
+    };
+
+
+    get writer() {
+        return this._author
+    };
+
+    set writer (updatedAuthor) {
+        this._author = updatedAuthor
+    }
+};
+
+function makeClass() {
+    class termostato {
+        constructor(temp){
+            this._temp = 5/9 *(temp-32)
+        };
+
+        get temperature(){
+            return this._temp;
+        };
+
+        set temperature(updatedTemp){
+            this._temp = updatedTemp;
+        };
+    }
+    return termostato
+};
+
+const termostato1 = makeClass();
+const thermos1 = new termostato1(76);
+let temp = thermos1.temperature;
+thermos1.temperature = 26;
+temp = thermos1.temperature

@@ -141,6 +141,34 @@ var meuNome = 'Mateus';
 primeiraLetra = meuNome[0]; //Acessando elementos da string pelo seu índice
 console.log(primeiraLetra);
 
+// Um novo modo de se escrever variáveis string: operador ` `
+
+const person = {
+    name:'Zodiac Hasbro',
+    age:56
+};
+
+const greeting = `Hello,my name is ${person.name} and
+I am ${person.age} years old`; // O operador é multilinha e precisa do operador ${} para acessar variáveis e suas propriedades
+
+console.log(greeting);
+
+let results = {
+    success: ['max-length','no-amd','prefer-arrow-functions'],
+    failure: ['no-var','var-on-top','linebreak'],
+    skipped:['id-blacklist','no-dup-keys']
+};
+
+function makeListArray(arr) {
+    let resultDisplayArray = [];
+    for (let i = 0;i < arr.length;i++){
+        resultDisplayArray.push(`<li class = "text-warning"> ${arr[i]}</li>`)
+    };
+    return resultDisplayArray;
+};
+
+console.log(makeListArray(results.failure))
+
 /*
 
                                     Utilizando índices para encontrar elementos
@@ -153,4 +181,33 @@ primeiraLetra = meuNome[0];
 ultimaLetra = meuNome[meuNome.length - 1];
 
 console.log(primeiraLetra);
-console.log(ultimaLetra)
+console.log(ultimaLetra);
+
+// Classes construtoras
+
+class SpaceShuttle {
+    constructor(targetPlanet){
+        this.targetPlanet = targetPlanet
+    }
+}
+
+var zeus = new SpaceShuttle('Jupiter');
+
+console.log(zeus.targetPlanet);
+
+// Também é possível atribuir classes a funções
+
+function makeClass() {
+    class Vegetable {
+        constructor(name){
+            this.name = name;
+        };
+    };
+    return Vegetable
+};
+
+vegetal = makeClass();
+cenoura = new vegetal('cenoura');
+console.log(cenoura.name);
+
+
